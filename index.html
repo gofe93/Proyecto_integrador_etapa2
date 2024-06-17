@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tablero de Gráficos</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart', 'bar', 'table']});
+      google.charts.setOnLoadCallback(drawCharts);
+
+      function drawCharts() {
+        drawLineChart();
+        drawLineTable();
+        drawBarChart();
+        drawBarTable();
+        drawPieChart();
+        drawPieTable();
+        drawTable();
+        drawStackedBarChart();
+        drawStackedBarTable();
+        drawAreaChart();
+        drawAreaTable();
+      }
+
+      function drawLineChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Año', 'Pobreza'],
+          ['2008', 44.5],
+          ['2010', 46.0],
+          ['2012', 45.5],
+          ['2014', 43.0],
+          ['2016', 41.5],
+          ['2018', 39.0]
+        ]);
+
+        var options = {
+          title: 'Pobreza en México',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('line_chart'));
+        chart.draw(data, options);
+      }
+
+      function drawLineTable() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Año');
+        data.addColumn('number', 'Pobreza');
+        data.addRows([
+          ['2008', 44.5],
+          ['2010', 46.0],
+          ['2012', 45.5],
+          ['2014', 43.0],
+          ['2016', 41.5],
+          ['2018', 39.0]
+        ]);
+
+        var table = new google.visualization.Table(document.getElementById('line_table'));
+        table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
+      }
+
+      function drawBarChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Entidad', '2008', '2018'],
+          ['Aguascalientes', 37.6, 22.6],
+          ['Baja California', 30.2, 22.6],
+          ['Campeche', 45.9, 39.1]
+        ]);
+
+        var options = {
+          chart: {
+            title: 'Comparación de Pobreza por Entidad',
+            subtitle: '2008 vs 2018',
+          },
+          bars: 'horizontal'
+        };
+
+        var chart = new google.visualization.BarChart(document.getElementById('bar_chart'));
+        chart.draw(data, options);
+      }
+
+      function drawBarTable() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Entidad');
+        data.addColumn('number', '2008');
+        data.addColumn('number', '2018');
+        data.addRows([
+          ['Aguascalientes', 37.6, 22.6],
+          ['Baja California', 30.2, 22.6],
+          ['Campeche', 45.9, 39.1]
+        ]);
+
+        var table = new google.visualization.Table(document.getElementById('bar_table'));
+        table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
+      }
+
+      function drawPieChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Entidad', 'Pobreza'],
+          ['Aguascalientes', 22.6],
+          ['Baja California', 22.6],
+          ['Campeche', 39.1]
+        ]);
+
+        var options = {
+          title: 'Distribución de Pobreza en 2018'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('pie_chart'));
+        chart.draw(data, options);
+      }
+
+      function drawPieTable() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Entidad');
+        data.addColumn('number', 'Pobreza');
+        data.addRows([
+          ['Aguascalientes', 22.6],
+          ['Baja California', 22.6],
+          ['Campeche', 39.1]
+        ]);
+
+        var table = new google.visualization.Table(document.getElementById('pie_table'));
+        table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
+      }
+
+      function drawTable() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Entidad');
+        data.addColumn('number', '2008');
+        data.addColumn('number', '2018');
+        data.addRows([
+          ['Aguascalientes', 37.6, 22.6],
+          ['Baja California', 30.2, 22.6],
+          ['Campeche', 45.9, 39.1]
+        ]);
+
+        var table = new google.visualization.Table(document.getElementById('table_div'));
+        table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
+      }
+
+      function drawStackedBarChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Año', 'Pobreza Moderada', 'Pobreza Extrema'],
+          ['2008', 20.0, 24.5],
+          ['2010', 21.0, 25.0],
+          ['2012', 20.5, 25.0],
+          ['2014', 19.0, 24.0],
+          ['2016', 18.5, 23.0],
+          ['2018', 17.0, 22.0]
+        ]);
+
+        var options = {
+          title: 'Pobreza Moderada vs Extrema',
+          isStacked: true
+        };
+
+        var chart = new google.visualization.BarChart(document.getElementById('stacked_bar_chart'));
+        chart.draw(data, options);
+      }
+
+      function drawStackedBarTable() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Año');
+        data.addColumn('number', 'Pobreza Moderada');
+        data.addColumn('number', 'Pobreza Extrema');
+        data.addRows([
+          ['2008', 20.0, 24.5],
+          ['2010', 21.0, 25.0],
+          ['2012', 20.5, 25.0],
+          ['2014', 19.0, 24.0],
+          ['2016', 18.5, 23.0],
+          ['2018', 17.0, 22.0]
+        ]);
+
+        var table = new google.visualization.Table(document.getElementById('stacked_bar_table'));
+        table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
+      }
+
+      function drawAreaChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Año', 'Pobreza'],
+          ['2008', 44.5],
+          ['2010', 46.0],
+          ['2012', 45.5],
+          ['2014', 43.0],
+          ['2016', 41.5],
+          ['2018', 39.0]
+        ]);
+
+        var options = {
+          title: 'Pobreza en México',
+          hAxis: {title: 'Año',  titleTextStyle: {color: '#333'}},
+          vAxis: {minValue: 0}
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('area_chart'));
+        chart.draw(data, options);
+      }
+
+      function drawAreaTable() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Año');
+        data.addColumn('number', 'Pobreza');
+        data.addRows([
+          ['2008', 44.5],
+          ['2010', 46.0],
+          ['2012', 45.5],
+          ['2014', 43.0],
+          ['2016', 41.5],
+          ['2018', 39.0]
+        ]);
+
+        var table = new google.visualization.Table(document.getElementById('area_table'));
+        table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Tablero de Gráficos de Pobreza en México</h1>
+
+    <h2>Gráfico de Línea</h2>
+    <div id="line_chart" style="width: 900px; height: 500px;"></div>
+    <div id="line_table" style="width: 900px; height: 500px;"></div>
+
+    <h2>Gráfico de Barras</h2>
+    <div id="bar_chart" style="width: 900px; height: 500px;"></div>
+    <div id="bar_table" style="width: 900px; height: 500px;"></div>
+
+    <h2>Gráfico de Pastel</h2>
+    <div id="pie_chart" style="width: 900px; height: 500px;"></div>
+    <div id="pie_table" style="width: 900px; height: 500px;"></div>
+
+    <h2>Tabla de Datos</h2>
+    <div id="table_div" style="width: 900px; height: 500px;"></div>
+
+    <h2>Gráfico de Barras Apiladas</h2>
+    <div id="stacked_bar_chart" style="width: 900px; height: 500px;"></div>
+    <div id="stacked_bar_table" style="width: 900px; height: 500px;"></div>
+
+    <h2>Gráfico de Área</h2>
+    <div id="area_chart" style="width: 900px; height: 500px;"></div>
+    <div id="area_table" style="width: 900px; height: 500px;"></div>
+  </body>
+</html>
